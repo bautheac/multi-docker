@@ -15,7 +15,7 @@ after_success:
     - docker build -t bautheac/multi-server ./server
     - docker build -t bautheac/multi-worker ./worker
     # Log in to the docker CLI.
-    - echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_ID" --password stdin
+    - echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_ID" --password-stdin
     # Take those images and push them to dockerhub.
     - docker push bautheac/multi-client 
     - docker push bautheac/multi-nginx 
