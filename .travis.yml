@@ -9,6 +9,7 @@ script:
     - docker run -e CI=true bautheac/react-test npm test --coverage
 
 after_success:
+    - sudo apt install gnupg2 pass
     - docker build -t bautheac/multi-client ./client
     - docker build -t bautheac/multi-nginx ./nginx
     - docker build -t bautheac/multi-server ./server
