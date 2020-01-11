@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+docker push bautheac/multi-client
+docker push bautheac/multi-nginx
+docker push bautheac/multi-server
+docker push bautheac/multi-worker
