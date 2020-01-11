@@ -6,16 +6,16 @@ before_install:
     - docker build -t bautheac/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true bautheac/react-test npm test --coverage
+    - docker run -e CI=true bautheac/react-test npm test
 
 after_success:
-    - sudo apt install gnupg2 pass
+    - sudo su
     - docker build -t bautheac/multi-client ./client
     - docker build -t bautheac/multi-nginx ./nginx
     - docker build -t bautheac/multi-server ./server
     - docker build -t bautheac/multi-worker ./worker
     # Log in to the docker CLI.
-    - echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_ID" --password-stdin
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # Take those images and push them to dockerhub.
     - docker push bautheac/multi-client 
     - docker push bautheac/multi-nginx 
