@@ -9,7 +9,6 @@ script:
     - docker run -e CI=true bautheac/react-test npm test
 
 after_success:
-    - sudo su
     - docker build -t bautheac/multi-client ./client
     - docker build -t bautheac/multi-nginx ./nginx
     - docker build -t bautheac/multi-server ./server
