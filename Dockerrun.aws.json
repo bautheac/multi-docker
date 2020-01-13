@@ -1,0 +1,31 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "bautheac/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "bautheac/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "bautheac/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "bautheac/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [{"hostport": 80, "containerPort": 80}],
+            "links": ["client", "server"]
+        }        
+    ]
+}
