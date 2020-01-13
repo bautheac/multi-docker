@@ -13,12 +13,13 @@ after_success:
     - docker build -t bautheac/multi-nginx ./nginx
     - docker build -t bautheac/multi-server ./server
     - docker build -t bautheac/multi-worker ./worker
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    - docker push bautheac/multi-client
+    - docker push bautheac/multi-nginx
+    - docker push bautheac/multi-server
+    - docker push bautheac/multi-worker
 
 deploy:
-  provider: script
-  script: bash docker_push
-  on:
-    branch: master
   provider: elasticbeanstalk
   region: eu-west-2
   app: multi-docker
